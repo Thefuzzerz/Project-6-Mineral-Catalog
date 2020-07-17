@@ -11,3 +11,5 @@
  The database is included completed. The database was created from the JSON file through the initialize function in models.py.
  
  Testing was completed and the coverage file included in the repository.
+ 
+ No superuser was created as entries were created in batch and individual model adjustment not required.
