@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% load static from static %}
+{% block title %}Bedrock Minerals: We are very sedimental{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/minerals.css' %}">
+<div class="">
+  <img id="home_logo" src="{% static 'images/logo.png' %}" alt="">
+</div>
+<div style="display: block; width: 100%; height: 200px; margin-left: 42%; ">
+  <a id="home_btn" href="{% url 'minerals:mineral_list' refine="ALL" %}">
+    <svg>
+      <rect x="0" y="0" fill="none" width="300" height="55" />
+    </svg>
+    Show Me The Minerals
+  </a>
+{% endblock %}

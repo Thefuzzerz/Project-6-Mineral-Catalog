@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% load static from static %}
+{% load mineral_extras %}
+{% block title %}Bedrock Mineral List{% endblock %}
+
+{% block content %}
+<div>
+  <div id="dropdown">
+    <button id="dropbtn">MENU</button>
+    <div id="dropdown-content">
+      <a href="{% url 'minerals:home_page' %}">HOME</a>
+      <a href="{% url 'minerals:mineral_list' refine="ALL" %}">MINERAL LIST</a>
+      <a href="{% url 'minerals:detail' pk=mineral|random_mineral name='random' %}">RANDOM MINERAL</a>
+    </div>
+  </div>
+  <div class="bounds" style="height:35rem;">
+    <div class="grid-100">
+      <img src="{% static 'images/banner.png' %}" alt="">
+      <p class="logo__text text-centered" style="color:white; font-size:16px;">Here to Rock your world!</p>
+    </div>
+  </div>
+  <div class="grid_full_page">
+    <div class="alphabet_container">
+      {% for letter in alphabet %}
+        {% if letter == refine %}
+          <a id="alphabet_active">{{ letter }}</a>
+        {% else %}
+          <a id="alphabet" href="{% url 'minerals:mineral_list' refine=letter %}">{{ letter }}</a>
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% for mineral in minerals %}
+      <a id="mineral" href="{% url 'minerals:detail' pk=mineral.pk name=mineral.name|string_only %}">{{ mineral.name|truncatewords:2 }}</a>
+    {% endfor %}
+  </div>
+  <div class="minerals__random">
+    <a id="mineral" href="{% url 'minerals:detail' pk=mineral|random_mineral name='random' %}">RANDOM MINERAL</a>
+  </div>
+</div>
+{% endblock %}

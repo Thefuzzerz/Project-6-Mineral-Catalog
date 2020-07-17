@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% load static from static %}
+{% load mineral_extras %}
+{% block title %}{{mineral.name}} Details{% endblock %}
+{% block content %}
+<div class="detail_container">
+  <div id="dropdown">
+    <button id="dropbtn">MENU</button>
+    <div id="dropdown-content">
+      <a href="{% url 'minerals:home_page' %}">HOME</a>
+      <a href="{% url 'minerals:mineral_list' refine="ALL" %}">MINERAL LIST</a>
+      <a href="{% url 'minerals:detail' pk=mineral|random_mineral name='random' %}">RANDOM MINERAL</a>
+    </div>
+  </div>
+  <img class="detail_banner" src="{% static 'images/banner.png' %}" alt="">
+  <br>
+  <div class="jumbotron">
+    <h1>{{mineral.name}}</h1>
+    <div class="image_container">
+      <img class="detail_image" src="{% static mineral|image_url %}" alt="">
+      <br>
+      {% if mineral.image_caption == "" %}
+      {% else %}
+      <h4 style="padding-bottom: 10px;">" {{mineral.image_caption}} "</h4>
+      {% endif %}
+    </div>
+    <div class="mineral_cont">
+      <table class="mineral_table">
+        <tbody>
+          {% for attribute in attributes %}
+          <tr>
+            <td style="font-weight: 600;">{{ attribute|mineral_attr }} :</td>
+            <td>{{ attribute|mineral_value}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
